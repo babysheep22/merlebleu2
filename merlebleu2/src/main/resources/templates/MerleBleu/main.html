@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>홈쇼핑 2팀</title>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
+            rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/css.css}">
+
+</head>
+
+<body>
+<form id="searchForm1" onsubmit="redirectToSearch1(); return false;">
+    <div class="main_wrap">
+        <div class="header_content gna">
+            <header class="common_menu">
+                <nav class="header_nav ">
+                    <ul>
+                        <li><a href="./main#"><img src="../img/icon/home2.png" alt=""></a></li>
+                        <li><a href="#">브랜드</a></li>
+                        <li><a href="#">BEST</a></li>
+                        <li><a href="#" onmouseover="cateHover('cate_box_child9')" onmouseout="cateOut()">카테고리</a>
+                        </li>
+                        <li><a href="#">기획전</a></li>
+                        <li><a href="#">OUTLET</a></li>
+                        <li><a href="#">HOT KEYWORD</a></li>
+                        <li><a href="/admin/main">관리자</a></li>
+                    </ul>
+                    <div class="cate_box4 cate_box_child9" onmouseover="cateHover('cate_box_child9')"
+                         onmouseout="cateOut()">
+                        <div class="wrap_nav">
+                            <div class="box_cont_wrap">
+                                <div class="box_cont cate_section">
+                                    <h3 style="font-size: 15px;">전체보기</h3>
+                                </div>
+                                <div class="box_cont_top_menu">
+                                    <div class="nav_side_a">
+                                        <h3><a href="/merlebleu/search_outer#">아우터</a></h3>
+                                        <ul>
+                                            <li><a href="/merlebleu/outer-jacket#" style="width: 50px;">쟈켓</a></li>
+                                            <li><a href="/merlebleu/outer-jumper#" style="width: 50px;">점퍼</a></li>
+                                            <li><a href="/merlebleu/outer-trench-coat#" style="width: 85px;">트렌치코트</a></li>
+                                            <li><a href="/merlebleu/outer-coat#" style="width: 50px;">코트</a></li>
+                                            <li><a href="/merlebleu/outer-padding#" style="width: 80px;">다운/패딩</a></li>
+                                            <li><a href="/merlebleu/outer-mustang#" style="width: 80px;">무스탕/퍼</a></li>
+                                            <li><a href="/merlebleu/outer-cardigan#" style="width: 65px;">가디건</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="box_cont_top_menu2">
+                                    <div class="nav_side_a">
+                                        <h3><a href="merlebleu/search_top#">탑</a></h3>
+                                        <ul>
+                                            <li><a href="/merlebleu/top-shirt#" style="width: 100px;">블라우스/셔츠</a></li>
+                                            <li><a href="/merlebleu/top-neat#" style="width: 60px;">티셔츠</a></li>
+                                            <li><a href="/merlebleu/top-tshirt#" style="width: 50px;">니트</a></li>
+                                            <li><a href="/merlebleu/top-sleeveless#" style="width: 90px;">슬리브리스</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="box_cont_top_menu3">
+                                    <div class="nav_side_a">
+                                        <h3><a href="merlebleu/search_skirt#">스커트</a></h3>
+                                        <ul>
+                                            <li><a href="/merlebleu/skirt-mini#" style="width: 50px;">미니</a></li>
+                                            <li><a href="/merlebleu/skirt-pensil#" style="width: 50px;">팬슬</a></li>
+                                            <li><a href="/merlebleu/skirt-flare#" style="width: 60px;">플레어</a></li>
+                                            <li><a href="/merlebleu/skirt-denim#" style="width: 50px;">데님</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="box_cont_top_menu4">
+                                    <div class="nav_side_a">
+                                        <h3><a href="merlebleu/search_pants#">팬츠</a></h3>
+                                        <ul>
+                                            <li><a href="/merlebleu/pants-formal#" style="width: 50px;">포멀</a></li>
+                                            <li><a href="/merlebleu/pants-casual#" style="width: 60px;">캐쥬얼</a></li>
+                                            <li><a href="/merlebleu/pants-shorts#" style="width: 50px;">쇼츠</a></li>
+                                            <li><a href="/merlebleu/pants-denim#" style="width: 50px;">데님</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="box_cont_top_menu5">
+                                    <div class="nav_side_a">
+                                        <h3><a href="merlebleu/search_onepiece#">원피스</a></h3>
+                                        <ul>
+                                            <li><a href="/merlebleu/onepiece-mini#" style="width: 50px;">미니</a></li>
+                                            <li><a href="/merlebleu/onepiece-midi#" style="width: 50px;">미디</a></li>
+                                            <li><a href="/merlebleu/onepiece-long#" style="margin-left: -10px;">롱</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="header_logo_top">
+                        <a href="./main#" class="header_logo_top_a">
+                            <h1>Merle Bleu</h1>
+                        </a>
+                    </div>
+                    <ul class="top_logo">
+                        <li sec:authorize="isAnonymous()">
+                            <a href="/members/login#">LOGIN/JOIN</a>
+                        </li>
+                        <li sec:authorize="isAuthenticated()">
+                            <a href="/members/logout">LOGOUT</a>
+                        </li>
+                        <li><a href="" onmouseover="cateHover('cate_box_child8')"
+                               onmouseout="cateOut()">COMMUNITY</a></li>
+                        <li><a href=""><img src="../img/icon/jjim.png" alt=""></a></li>
+                        <li><a href="" onmouseover="cateHover('cate_box_child7')" onmouseout="cateOut()"><img
+                                src="../img/icon/loginwh.png" alt=""></a></li>
+                        <li><a href="/cart"><img src="../img/icon/j.png" alt=""></a></li>
+                        <li><a href="" onmouseover="cateHover('cate_box_child10')" onmouseout="cateOut()"><img
+                                src="../img/icon/dod2.png" alt=""></a></li>
+                    </ul>
+                </nav>
+                <div class="cate_box2 cate_box_child7" onmouseover="cateHover('cate_box_child7')"
+                     onmouseout="cateOut()" style="z-index: 30;">
+                    <div class="nav_side_a">
+                        <ul>
+                            <li><a href="./mypage#" style="width: 75px;">마이페이지</a></li>
+                            <li><a href="./order-details#" style="width: 60px;">주문내역</a></li>
+                            <li><a href="./mileage#" style="width: 60px;">마일리지</a></li>
+                            <li><a href="./inquiry#" style="width: 65px;">1:1문의</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="cate_box3 cate_box_child8" onmouseover="cateHover('cate_box_child8')"
+                     onmouseout="cateOut()" style="z-index: 30;">
+                    <div class="nav_side_a">
+                        <ul>
+                            <li><a href="./notice#" style="width: 75px;">공지사항</a></li>
+                            <li><a href="./qna#" style="width: 60px;">Q&A</a></li>
+                            <li><a href="./faq#" style="width: 60px;">FAQ</a></li>
+                            <li><a href="./event#" style="width: 60px;">EVENT</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="header_logo">
+                    <h1 class="header_logo_hidden" ><a href="./main#">Merle Bleu</a></h1>
+                </div>
+                <div class="header_bottom_nav logo_menu" style="z-index: 10;">
+                    <ul>
+                        <li>
+                            <a href="#" onmouseover="cateHover('cate_box_child0')" onmouseout="cateOut()">NEW</a>
+                        </li>
+                        <li>
+                            <a href="#" onmouseover="cateHover('cate_box_child1')" onmouseout="cateOut()">BEST</a>
+                        </li>
+                        <li>
+                            <a href="#" onmouseover="cateHover('cate_box_child2')" onmouseout="cateOut()">기획전</a>
+                        </li>
+                        <li>
+                            <a href="#" onmouseover="cateHover('cate_box_child3')" onmouseout="cateOut()">의류</a>
+                        </li>
+                        <li>
+                            <a href="#" onmouseover="cateHover('cate_box_child4')" onmouseout="cateOut()">패션잡화</a>
+                        </li>
+                        <li>
+                            <a href="#" onmouseover="cateHover('cate_box_child5')" onmouseout="cateOut()">스토리</a>
+                        </li>
+                        <li>
+                            <a href="#" onmouseover="cateHover('cate_box_child6')" onmouseout="cateOut()">
+                                <img src="../img/icon/dod.png" alt="" class="search_img">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="cate_box cate_box_child0" onmouseover="cateHover('cate_box_child0')"
+                         onmouseout="cateOut()">
+                        <div class="wrap_nav">
+                            <div class="box_cont_wrap">
+                                <div class="box_cont cate_section">
+                                    <h3>NEW</h3>
+                                    <ul>
+                                        <li><a href="#">이달의
+                                            신상품</a>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li><a href="#">NEW
+                                            컬렉션</a></li>
+                                    </ul>
+                                </div>
+                                <div><img src="../img/nav/new.jpg" alt=""></div>
+                            </div>
+                            <div class="nav_side">
+                                <div class="nav_side_title">
+                                    <h3>이 달의 신상품</h3>
+                                </div>
+                                <ul>
+                                    <li>자유와 즐거움의 <br>에너지를 담은 멜 블루의 <br>NEW Merle Bleu <br><br><br><a href="#">SHOP
+                                        NOW</a></li>
+                                </ul>
+                                <div class="nav_side_img">
+                                    <img src="../img/nav/new4.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cate_box cate_box_child1" onmouseover="cateHover('cate_box_child1')"
+                         onmouseout="cateOut()">
+                        <div class="wrap_nav">
+                            <div class="box_cont_wrap">
+                                <div class="box_cont cate_section">
+                                    <h3>BEST</h3>
+                                    <ul>
+                                        <li><a href="./thismonth-best#">이달의 베스트</a>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li><a href="merlebleu/outer-best#">아우터 베스트</a></li>
+                                    </ul>
+                                </div>
+                                <div><img src="../img/nav/best.jpg" alt=""></div>
+                            </div>
+                            <div class="nav_side">
+                                <div>
+                                    <h3></h3>
+                                </div>
+                                <!-- <ul>
+                                    <li>자유와 즐거움의 <br>에너지를 담은 멜 블루의 <br>NEW Merle Bleu <br><br><br><a
+                                            href="#">SHOP
+                                            NOW</a></li>
+                                </ul> -->
+                                <div class="nav_side_img">
+                                    <img src="../img/nav/best2.jpg" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cate_box cate_box_child2" onmouseover="cateHover('cate_box_child2')"
+                         onmouseout="cateOut()">
+                        <div class="wrap_nav">
+                            <div class="box_cont_wrap">
+                                <div class="box_cont cate_section">
+                                    <h3>기획전</h3>
+                                    <ul>
+                                        <li><a href="./exelucive#" style="color: rgb(109, 109 ,109);">EXCLUCIVE</a>
+                                        </li>
+                                    </ul>
+                                    <ul>
+                                        <li><a href="#"></a></li>
+                                    </ul>
+                                </div>
+                                <div><img src="#" alt=""></div>
+                            </div>
+                            <div class="nav_side">
+                                <div>
+                                    <div><img src="../img/nav/ex2.jpg" alt="" style="width: 220px;"></div>
+                                    <h3></h3>
+                                </div>
+                                <!-- <ul>
+                                    <li>자유와 즐거움의 <br>에너지를 담은 멜 블루의 <br>NEW Merle Bleu <br><br><br><a
+                                            href="#">SHOP
+                                            NOW</a></li>
+                                </ul> -->
+                                <div class="nav_side_img">
+                                    <img src="#" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cate_box cate_box_child3" onmouseover="cateHover('cate_box_child3')"
+                         onmouseout="cateOut()">
+                        <div class="wrap_nav">
+                            <div class="box_cont_wrap">
+                                <div class="box_cont cate_section">
+                                    <h3>전체보기</h3>
+                                </div>
+                                <div class="box_cont_menu">
+                                    <h3><a href="/merlebleu/search_outer#">아우터</a></h3>
+                                    <ul>
+                                        <li><a href="/merlebleu/outer-jacket#" style="width: 30px;">쟈켓</a></li>
+                                        <li><a href="/merlebleu/outer-jumper#" style="width: 30px;">점퍼</a></li>
+                                        <li><a href="/merlebleu/outer-trench-coat#" style="width: 75px;">트렌치코트</a></li>
+                                        <li><a href="/merlebleu/outer-coat#" style="width: 30px;">코트</a></li>
+                                        <li><a href="/merlebleu/outer-padding#" style="width: 65px;">다운/패딩</a></li>
+                                        <li><a href="/merlebleu/outer-mustang#" style="width: 65px;">무스탕/퍼</a></li>
+                                        <li><a href="/merlebleu/outer-cardigan#" style="width: 45px;">가디건</a></li>
+                                    </ul>
+                                </div>
+                                <div class="box_cont_menu2">
+                                    <h3><a href="/merlebleu/search_top#">탑</a></h3></h3>
+                                    <ul>
+                                        <li><a href="/merlebleu/top-shirt#" style="width: 100px;">블라우스/셔츠</a></li>
+                                        <li><a href="/merlebleu/top-tshirt#" style="width: 45px;">티셔츠</a></li>
+                                        <li><a href="/merlebleu/top-neat#" style="width: 30px;">니트</a></li>
+                                        <li><a href="/merlebleu/top-sleeveless#" style="width: 75px;">슬리브리스</a></li>
+                                    </ul>
+                                </div>
+                                <div class="box_cont_menu3">
+                                    <h3><a href="/merlebleu/search_skirt#">스커트</a></h3></h3></h3>
+                                    <ul>
+                                        <li><a href="/merlebleu/skirt-mini#" style="width: 30px;">미니</a></li>
+                                        <li><a href="/merlebleu/skirt-pencil#" style="width: 30px;">팬슬</a></li>
+                                        <li><a href="/merlebleu/skirt-flare#" style="width: 45px;">플레어</a></li>
+                                        <li><a href="/merlebleu/skirt-denim#" style="width: 30px;">데님</a></li>
+                                    </ul>
+                                </div>
+                                <div class="box_cont_menu4">
+                                    <h3><a href="/merlebleu/search_pants#">팬츠</a></h3>
+                                    <ul>
+                                        <li><a href="/merlebleu/pants-formal#" style="width: 30px;">포멀</a></li>
+                                        <li><a href="/merlebleu/pants-casual#" style="width: 45px;">캐쥬얼</a></li>
+                                        <li><a href="/merlebleu/pants-shorts#" style="width: 30px;">쇼츠</a></li>
+                                        <li><a href="/merlebleu/pants-denim#" style="width: 30px;">데님</a></li>
+                                    </ul>
+                                </div>
+                                <div class="box_cont_menu5">
+                                    <h3><a href="/merlebleu/search_onepiece#">원피스</a></h3>
+                                    <ul>
+                                        <li><a href="/merlebleu/onepiece-mini#" style="width: 30px;">미니</a></li>
+                                        <li><a href="/merlebleu/onepiece-midi#" style="width: 30px;">미디</a></li>
+                                        <li><a href="/merlebleu/onepiece-long#" style="width: 15px;">롱</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cate_box cate_box_child4" onmouseover="cateHover('cate_box_child4')"
+                         onmouseout="cateOut()">
+                        <div class="wrap_nav">
+                            <div class="box_cont_wrap">
+                                <div class="box_cont cate_section">
+                                    <div class="box_cont_menu_stuff"
+                                         style="margin-top: -31px; margin-left: 22px; width: 100%;">
+                                        <h3><a href="/merlebleu/search_stuff#">패션잡화</a></h3>
+                                        <ul>
+                                            <li><a href="/merlebleu/stuff-bag#" style="width: 30px;">가방</a></li>
+                                            <li><a href="/merlebleu/stuff-shoes#" style="width: 30px;">슈즈</a></li>
+                                            <li><a href="/merlebleu/stuff-hat#" style="width: 30px;">모자</a></li>
+                                            <li><a href="/merlebleu/stuff-scarf#" style="width: 90px;">스카프/머플러</a></li>
+                                            <li><a href="/merlebleu/stuff-belt#" style="width: 30px;">벨트</a></li>
+                                            <li><a href="/merlebleu/stuff-socks#" style="width: 80px;">양말/스타킹</a></li>
+                                            <li><a href="/merlebleu/stuff-etc#" style="width: 30px;">기타</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="box_cont_menu_stuff1">
+                                    <ul>
+                                        <li><a href="/merlebleu/stuff-shoes#"><img src="../img/nav/more.png" alt=""></a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="box_cont_menu_stuff2">
+                                <ul>
+                                    <li><a href="/merlebleu/stuff-bag#"><img src="../img/nav/more2.png" alt=""></a></li>
+                                </ul>
+                            </div>
+                            <div class="box_cont_menu_stuff3">
+                                <ul>
+                                    <li><a href="/merlebleu/stuff-etc#"><img src="../img/nav/more3.png" alt=""></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cate_box cate_box_child5" onmouseover="cateHover('cate_box_child5')"
+                         onmouseout="cateOut()">
+                        <div class="wrap_nav">
+                            <div class="box_cont_wrap">
+                                <div class="box_cont_menu_story">
+                                    <ul>
+                                        <li><a href=""><img src="../img/nav/story.png" alt=""></a></li>
+                                        <li><a href=""><img src="" alt=""></a></li>
+                                        <li><a href="/merlebleu/collection#"><img src="" alt="">컬렉션</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="box_cont_menu_story2">
+                                <ul>
+                                    <li><a href=""><img src="../img/nav/story2.png" alt=""></a></li>
+                                    <li><a href=""><img src="" alt=""></a></li>
+                                    <li><a href="/merlebleu/news#"><img src="" alt="">뉴스/이벤트</a></li>
+                                </ul>
+                            </div>
+                            <div class="box_cont_menu_story3">
+                                <ul>
+                                    <li><a href=""><img src="../img/nav/story3.png" alt=""></a></li>
+                                    <li><a href=""><img src="" alt=""></a></li>
+                                    <li><a href="/merlebleu/brand#"><img src="" alt="">브랜드 소개</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cate_box cate_box_child6" onmouseover="cateHover('cate_box_child6')"
+                         onmouseout="cateOut()">
+                        <div class="wrap_nav">
+                            <div class="box_cont_wrap" style="margin-left: 50%;">
+                                <div id="input-form" style="margin: 0 auto;" class="search_input">
+                                    <input autocomplete="off" class="search_input_detail" type="text"
+                                           id="searchKeyword1" placeholder="검색어를 입력하세요" style="padding: 15px;">
+                                    <button class="search_button" type="submit"
+                                            onclick="redirectToSearch1()">검색</button>
+                                    <br><span class="error-message" id="errorMessage1"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="kategory">
+                            <ul>
+                                <h3>카테고리 검색</h3>
+                                <li><a href="/merlebleu/search_outer#">#아우터</a></li>
+                                <li><a href="/merlebleu/search_top#">#탑</a></li>
+                                <li><a href="/merlebleu/search_skirt#">#스커트</a></li>
+                                <li><a href="/merlebleu/search_pants#">#팬츠</a></li>
+                                <li><a href="/merlebleu/search_onepiece#">#원피스</a></li>
+                                <li><a href="/merlebleu/search_stuff#">#패션잡화</a></li>
+                            </ul>
+                        </div>
+                        <div class="kategory_gif">
+                            <img src="../img/nav/MB.gif" alt="">
+                        </div>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <!-- Slideshow container -->
+        <div class="slideshow-container" style="z-index: -1;">
+
+            <!-- Full-width images with number and caption text -->
+            <div class="mySlides fade">
+                <div class="numbertext">1 / 4</div>
+                <a href="#"><img src="../img/slide/main.jpg"></a>
+                <div class="text-slides">Merle Bleu</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 4</div>
+                <a href="#"><img src="../img/slide/5455f4d11edaf21c1d810c581cf9cf87.jpg"></a>
+                <div class="text-slides">Merle Bleu</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 4</div>
+                <a href="#"><img src="../img/slide/6275ee5997e2e68878855f2149575174.jpg"></a>
+                <div class="text-slides">Merle Bleu</div>
+            </div>
+
+            <div class="mySlides fade">
+                <div class="numbertext">4 / 4</div>
+                <a href="#"><img
+                        src="../img/slide/3e6cdc762ff417ff24724fe29eb17409.jpg"></a>
+                <div class="text-slides">Merle Bleu</div>
+            </div>
+
+            <!-- Next and previous buttons -->
+            <a class="prev arrow left" onclick="plusSlides(-1)"></a>
+            <a class="next arrow right" onclick="plusSlides(1)"></a>
+        </div>
+        <br>
+
+        <!-- The dots/circles -->
+        <div style="text-align:center; margin-top: -210px;">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+    </div>
+</form>
+
+<form id="searchForm2" onsubmit="handleSearch(); return false;">
+    <div class="cate_box5 cate_box_child10" onmouseover="cateHover('cate_box_child10')" onmouseout="cateOut()">
+        <div class="wrap_nav2">
+            <div class="box_cont_wrap2" style="margin-left: 50%;">
+                <div id="input-form" style="margin: 0 auto;" class="search_input">
+                    <input autocomplete="off" class="search_input_detail" type="text" id="searchKeyword2"
+                           placeholder="검색어를 입력하세요" style="padding: 15px;">
+                    <button class="search_button" type="submit" onclick="handleSearch()">검색</button>
+                    <p style="margin-bottom: -15px;" class="error-message" id="errorMessage2"></p>
+                </div>
+            </div>
+        </div>
+        <div class="kategory2">
+            <ul>
+                <h3>카테고리 검색</h3>
+                <li><a href="/merlebleu/search_outer#">#아우터</a></li>
+                <li><a href="/merlebleu/search_top#">#탑</a></li>
+                <li><a href="/merlebleu/search_skirt#">#스커트</a></li>
+                <li><a href="/merlebleu/search_pants#">#팬츠</a></li>
+                <li><a href="/merlebleu/search_onepiece#">#원피스</a></li>
+                <li><a href="/merlebleu/search_stuff#">#패션잡화</a></li>
+            </ul>
+        </div>
+        <div class="srch_keyword_box">
+            <div class="recent_keyword">
+                <h3>최근 검색어</h3>
+                <a class="delete" onclick="allDeleteCookie()" style="cursor: pointer;">전체삭제</a>
+                <ul id="recentSearchList">
+                    <!-- Recent searches will be added here dynamically -->
+                </ul>
+            </div>
+        </div>
+    </div>
+</form>
+<!--asdddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd-->
+
+
+<form action="">
+    <div class="slide-baner">
+        <div class="slide-baner-content">
+            <a href=""><img src="../img/new_item/ccc.jpg" alt=""></a>
+            <div class="new_text">
+                <h3>NEW <br>Arrivals</h3>
+            </div>
+            <a href="#">
+                <div class="new_text2">SHOP NOW</div>
+            </a>
+        </div>
+    </div>
+    <div class="scroll" data-scroll>
+        <div class="scroll-content" data-scroll-content>
+            <article class="slide-1 js-slide" th:each="item : ${items.getContent()}" th:classappend="${itemStat.even}==true ? item_bottom">
+                <div class="slide_inner">
+                    <div class="slide_img js-transition-img">
+                        <figure class="js-transition-img_inner">
+                            <a th:href="'/item/' +${item.id}"><img class="scroll-area" th:src="${item.imgUrl}" draggable="false"
+                                            onmousedown="startDrag(event)"></a>
+                            <p class="item_name" th:text="${item.itemNm}"></p>
+                            <p class="item_price" th:text="${item.discount  + '원'}"></p>
+                            <p class="item_price2" th:text="${item.listprice + '원'}"></p>
+                            <p class="item_sale" th:text="${item.sellprice + '%'}"></p>
+                        </figure>
+                    </div>
+                </div>
+            </article>
+        </div>
+        <div class="scroll-indicator-background"></div>
+        <div class="scroll-indicator" data-scroll-indicator></div>
+    </div>
+</form>
+<!--ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd-->
+<div class="best_sellings">
+    <div class="slide-baner">
+        <div class="slide-baner-content">
+            <a href=""><img src="../img/new_item/bestsel_banner.jpg" alt=""></a>
+            <div class="new2_text">
+                <h3>BEST <br>sellings</h3>
+            </div>
+            <a href="">
+                <div class="new2_text2">SHOP NOW</div>
+            </a>
+        </div>
+    </div>
+    <div class="scroll" data-scroll2>
+        <div class="scroll-content" data-scroll-content2>
+
+<!--            th:each로 상품 리스트 불러옴. classappend로 이미지 위아래 번갈아 출력되도록(짝수번째 사진에 item_bottom스타일 적용)-->
+            <article class="slide-1 js-slide" th:each="item : ${items.getContent()}" th:classappend="${itemStat.even}==true ? item_bottom">
+                <div class="slide_inner">
+                    <div class="slide_img js-transition-img">
+                        <figure class="js-transition-img_inner">
+                            <a th:href="'/item/'+${item.id}"><img class="scroll-area" th:src="${item.imgUrl}" draggable="false"
+                                            onmousedown="startDrag(event)"></a>
+                            <p class="item_name" th:text="${item.itemNm}"></p>
+                            <p class="item_price" th:text="${item.discount  + '원'}"></p>
+                            <p class="item_price2" th:text="${item.listprice + '원'}"></p>
+                            <p class="item_sale" th:text="${item.sellprice + '%'}"></p>
+                        </figure>
+                    </div>
+                </div>
+            </article>
+
+        </div>
+        <div class="scroll-indicator-background2"></div>
+        <div class="scroll-indicator2" data-scroll-indicator2></div>
+    </div>
+</div>
+</form>
+
+<!-- <a href="#"><img src="../img/new_item/new11new.jpg" class="rover" width="300" height="300" onmouseover="this.src='../img/new_item/new4.jpg';" onmouseout="this.src='../img/new_item/new11new.jpg';"></a> -->
+
+<form action="">
+    <div class="special-wrap">
+        <div class="special-content">
+            <div class="special-title">
+                <h3>SPECIAL Pick</h3>
+            </div>
+            <div class="best-shop-now">
+                <h3><a href="">SHOP NOW</a></h3>
+            </div>
+            <div class="product">
+                <ul>
+                    <li><a href="#"><img src="../img/new_item/new11new.jpg" id="project-img"
+                                         onmouseover="this.src='../img/new_item/new4.jpg';" width="345" height="345"
+                                         onmouseout="this.src='../img/new_item/new11new.jpg';">
+                        <p class="special-merle">Merle Bleu</p>
+                        <p class="special_name">(SET-UP) 하프슬리브 턴업소매 자켓_C242MSF237</p>
+                        <p class="special_price">299,000원</p>
+                        <p class="special_price2">239,200원</p>
+                        <p class="special_sale">20%</p>
+                    </a></li>
+                    <li><a href="#"><img src="../img/special/long.jpg" width="345" height="345"
+                                         onmouseover="this.src='../img/special/long2.jpg';"
+                                         onmouseout="this.src='../img/special/long.jpg';">
+                        <p class="special-merle">Merle Bleu</p>
+                        <p class="special_name">(SET-UP) 하프슬리브 턴업소매 자켓_C242MSF237</p>
+                        <p class="special_price">299,000원</p>
+                        <p class="special_price2">239,200원</p>
+                        <p class="special_sale">20%</p>
+                    </a></li>
+                    <li><a href="#"><img src="../img/special/one.jpg" width="345" height="345"
+                                         onmouseover="this.src='../img/special/one2.jpg';"
+                                         onmouseout="this.src='../img/special/one.jpg';">
+                        <p class="special-merle">Merle Bleu</p>
+                        <p class="special_name">(SET-UP) 하프슬리브 턴업소매 자켓_C242MSF237</p>
+                        <p class="special_price">299,000원</p>
+                        <p class="special_price2">239,200원</p>
+                        <p class="special_sale">20%</p>
+                    </a></li>
+                    <li><a href="#"><img src="../img/special/skirt.jpg" width="345" height="345"
+                                         onmouseover="this.src='../img/special/skirt2.jpg';"
+                                         onmouseout="this.src='../img/special/skirt.jpg';">
+                        <p class="special-merle">Merle Bleu</p>
+                        <p class="special_name">(SET-UP) 하프슬리브 턴업소매 자켓_C242MSF237</p>
+                        <p class="special_price">299,000원</p>
+                        <p class="special_price2">239,200원</p>
+                        <p class="special_sale">20%</p>
+                    </a></li>
+                </ul>
+            </div>
+            <div class="product">
+                <ul>
+                    <li><a href="#"><img src="../img/special/t.jpg" width="345" height="345"
+                                         onmouseover="this.src='../img/special/t2.jpg';"
+                                         onmouseout="this.src='../img/special/t.jpg';">
+                        <p class="special-merle">Merle Bleu</p>
+                        <p class="special_name">(SET-UP) 하프슬리브 턴업소매 자켓_C242MSF237</p>
+                        <p class="special_price">299,000원</p>
+                        <p class="special_price2">239,200원</p>
+                        <p class="special_sale">20%</p>
+                    </a></li>
+                    <li><a href="#"><img src="../img/special/ni3.jpg" width="345" height="345"
+                                         onmouseover="this.src='../img/special/ni33.jpg';"
+                                         onmouseout="this.src='../img/special/ni3.jpg';">
+                        <p class="special-merle">Merle Bleu</p>
+                        <p class="special_name">(SET-UP) 하프슬리브 턴업소매 자켓_C242MSF237</p>
+                        <p class="special_price">299,000원</p>
+                        <p class="special_price2">239,200원</p>
+                        <p class="special_sale">20%</p>
+                    </a></li>
+                    <li><a href="#"><img src="../img/special/one3.jpg" width="345" height="345"
+                                         onmouseover="this.src='../img/special/one33.jpg';"
+                                         onmouseout="this.src='../img/special/one3.jpg';">
+                        <p class="special-merle">Merle Bleu</p>
+                        <p class="special_name">(SET-UP) 하프슬리브 턴업소매 자켓_C242MSF237</p>
+                        <p class="special_price">299,000원</p>
+                        <p class="special_price2">239,200원</p>
+                        <p class="special_sale">20%</p>
+                    </a></li>
+                    <li><a href="#"><img src="../img/special/bra.jpg" width="345" height="345"
+                                         onmouseover="this.src='../img/special/bra2.jpg';"
+                                         onmouseout="this.src='../img/special/bra.jpg';">
+                        <p class="special-merle">Merle Bleu</p>
+                        <p class="special_name">(SET-UP) 하프슬리브 턴업소매 자켓_C242MSF237</p>
+                        <p class="special_price">299,000원</p>
+                        <p class="special_price2">239,200원</p>
+                        <p class="special_sale">20%</p>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+<form action="">
+    <div class="footer-wrap">
+        <div class="footer-content">
+            <div class="footer-inline">
+                <img class="footer-img" src="../img/footer/footer.jpg" width="345" height="345" alt="Avatar">
+                <div class="footer-overlay">
+                    <div class="overlay-text">@Merle Bleu<br>프랑스 패션 <br>소셜네트워크</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-inline">
+                <img class="footer-img" src="../img/footer/footer8.jpg" width="345" height="345" alt="Avatar">
+                <div class="footer-overlay">
+                    <div class="overlay-text">@Merle Bleu<br>프랑스 패션 <br>소셜네트워크</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-inline">
+                <img class="footer-img" src="../img/footer/footer3.jpg" width="345" height="345" alt="Avatar">
+                <div class="footer-overlay">
+                    <div class="overlay-text">@Merle Bleu<br>프랑스 패션 <br>소셜네트워크</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-inline">
+                <img class="footer-img" src="../img/footer/footer4.jpg" width="345" height="345" alt="Avatar">
+                <div class="footer-overlay">
+                    <div class="overlay-text">@Merle Bleu<br>프랑스 패션 <br>소셜네트워크</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-inline">
+                <img class="footer-img" src="../img/footer/footer5.jpg" width="345" height="345" alt="Avatar">
+                <div class="footer-overlay">
+                    <div class="overlay-text">@Merle Bleu<br>프랑스 패션 <br>소셜네트워크</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-inline">
+                <img class="footer-img" src="../img/footer/footer6.jpg" width="345" height="345" alt="Avatar">
+                <div class="footer-overlay">
+                    <div class="overlay-text">@Merle Bleu<br>프랑스 패션 <br>소셜네트워크</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-inline">
+                <img class="footer-img" src="../img/footer/footer7.jpg" width="345" height="345" alt="Avatar">
+                <div class="footer-overlay">
+                    <div class="overlay-text">@Merle Bleu<br>프랑스 패션 <br>소셜네트워크</div>
+                </div>
+            </div>
+        </div>
+        <div class="footer-content">
+            <div class="footer-inline">
+                <img class="footer-img" src="../img/footer/footrer2.jpg" width="345" height="345" alt="Avatar">
+                <div class="footer-overlay">
+                    <div class="overlay-text">@Merle Bleu<br>프랑스 패션 <br>소셜네트워크</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+<form action="">
+    <div class="footer-middle-wrap">
+        <div class="footer-middle-content">
+            <div class="footer-middle-title">
+                <h3>EVENT</h3>
+            </div>
+            <ul>
+                <a href="#">
+                    <li>6월 배송지연관련안내</li>
+                </a>
+                <a href="#">
+                    <li>리뷰응모이벤트 당첨자 발표</li>
+                </a>
+                <a href="#">
+                    <li>개인정보 취급방침 변경 안내</li>
+                </a>
+            </ul>
+        </div>
+        <div class="footer-middle-content2">
+            <div class="footer-middle-title">
+                <h3>ABOUT US</h3>
+            </div>
+            <ul>
+                <a href="#">
+                    <li>기업소개</li>
+                </a>
+                <a href="#">
+                    <li>이용안내</li>
+                </a>
+                <a href="#">
+                    <li>회원혜택</li>
+                </a>
+                <a href="#">
+                    <li>EVENT</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+</form>
+
+<form action="">
+    <div class="footer-bottom-wrap" >
+        <div class="footer-bottom-content">
+            <div class="footer-bottom-title">
+                <a href="#">이용약관</a><a href="#">개인정보처리방침</a><a href="#">에스크로서비스 가입확인</a>
+            </div>
+            <div class="footer-bottom-detail">상호:㈜Merle Bleu <span class="footer_ footer-bottom-span">공동대표:
+                        서민규</span>
+                박주형</span><br>주소:부산광역시 부산진구 중앙대로 631 선물빌딩 10F <span
+                        class="footer-bottom-span2 footer_2"></span>전화:080-000-0000 <span
+                        class="footer-bottom-span3 footer_3"></span>FAX:02-3485 -7599 <span
+                        class="footer-bottom-span4 footer_4"></span>이메일:merlebleu@merlebleu.com
+                <br>사업자등록번호:000-00-00000<a href="#">[사업자정보확인]</a><span
+                        class="footer-bottom-span5 footer_5"></span><span class="f-b-l"></span>통신판매업신고번호:2017-서울강남-04214
+                <span class="footer-bottom-span6 footer_6"></span> <span class="f-b-l"></span>개인정보보호책임자:이하늬 <br>고객님은
+                안전거래를 위해 현금으로 결제 시 저희 쇼핑몰에 가입한 구매안전서비스를 이용하실 수 있습니다. <br><br>COPYRIGHTⓒ㈜Merle Bleu.all rights
+                reserved. <span class="footer-bottom-span7 footer_7"></span><span class="f-b-l"></span>호스팅 제공자:㈜위사
+                <span class="f-b-l"></span>managed by <b>WISA.</b>
+            </div>
+            <div class="footer-bottom-right" >
+                <ul style="list-style: none;">
+                    <li style="color: rgb(255, 255, 255);">고객상담센터 운영시간</li>
+                    <li style="color: rgb(255, 255, 255);">평일:오전10:00-오후17:00</li>
+                    <li style="color: rgb(255, 255, 255);">점심시간:오후12:30-오후13:30 <br>주말,공휴일은 휴무입니다.</li>
+                    <li style=" width: 75px;"><a href="#"><img width="20px" src="../img/icon/kakao.png" alt=""></a><a href="#"
+                                                                                                                      style="margin-left: 10px;"><img src="../img/icon/instar.png" style="width: 20px;" alt=""></a></li>
+                </ul>
+                <div class="footer-middle-title" style="margin-top: 100px; position: absolute;">
+                    <h3 style="color: rgb(255, 255, 255);">080-022-1500</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<script th:src="@{/js/js.js}" type="text/javascript"></script>
+</body>
+
+</html>

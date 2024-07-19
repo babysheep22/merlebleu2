@@ -1,0 +1,488 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>SmoothMovingLayer Demo</title>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+    <script type="text/javascript">
+        //본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
+        function sample4_execDaumPostcode() {
+            new daum.Postcode({
+                oncomplete: function (data) {
+                    // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                    // 도로명 주소의 노출 규칙에 따라 주소를 표시한다.
+                    // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                    var roadAddr = data.roadAddress; // 도로명 주소 변수
+                    var extraRoadAddr = ''; // 참고 항목 변수
+
+                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                    if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+                        extraRoadAddr += data.bname;
+                    }
+                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                    if (data.buildingName !== '' && data.apartment === 'Y') {
+                        extraRoadAddr += (extraRoadAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                    if (extraRoadAddr !== '') {
+                        extraRoadAddr = ' (' + extraRoadAddr + ')';
+                    }
+
+                    // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                    document.getElementById('sample4_postcode').value = data.zonecode;
+                    document.getElementById("sample4_roadAddress").value = roadAddr;
+                    document.getElementById("sample4_jibunAddress").value = data.jibunAddress;
+
+                    // 참고항목 문자열이 있을 경우 해당 필드에 넣는다.
+                    if (roadAddr !== '') {
+                        document.getElementById("sample4_extraAddress").value = extraRoadAddr;
+                    } else {
+                        document.getElementById("sample4_extraAddress").value = '';
+                    }
+
+                    var guideTextBox = document.getElementById("guide");
+                    // 사용자가 '선택 안함'을 클릭한 경우, 예상 주소라는 표시를 해준다.
+                    if (data.autoRoadAddress) {
+                        var expRoadAddr = data.autoRoadAddress + extraRoadAddr;
+                        guideTextBox.innerHTML = '(예상 도로명 주소 : ' + expRoadAddr + ')';
+                        guideTextBox.style.display = 'block';
+
+                    } else if (data.autoJibunAddress) {
+                        var expJibunAddr = data.autoJibunAddress;
+                        guideTextBox.innerHTML = '(예상 지번 주소 : ' + expJibunAddr + ')';
+                        guideTextBox.style.display = 'block';
+                    } else {
+                        guideTextBox.innerHTML = '';
+                        guideTextBox.style.display = 'none';
+                    }
+                }
+            }).open();
+        }
+
+        function clearFields() {
+            document.getElementById('deliveryName').value = '';
+            document.getElementById('deliveryPhone').value = '';
+            document.getElementById('deliveryEmail').value = '';
+            document.getElementById('deliveryPostcode').value = '';
+            document.getElementById('deliveryAddress1').value = '';
+            document.getElementById('deliveryAddress2').value = '';
+            document.getElementById('deliveryMsg').value = '';
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('newAddressButton').addEventListener('click', clearFields);
+        });
+
+
+        var deliveryFee = 3000; // 배송비 고정값
+
+        // 선택한 열 삭제
+        function deleteSelectedRows() {
+            var checkboxes = document.querySelectorAll('tbody input[type="checkbox"]:checked');
+            checkboxes.forEach(function (checkbox) {
+                var row = checkbox.parentNode.parentNode;
+                row.parentNode.removeChild(row);
+            });
+            updateTotal();
+        }
+
+        function deleteRow(button) {
+            // 클릭된 버튼의 부모 요소인 <tr>을 찾아서 삭제
+            var row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            updateTotal();
+            checkAllSelected();
+        }
+
+        // 전체 체크
+        function toggleAll(source) {
+            var checkboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = source.checked;
+            });
+            updateTotal();
+        }
+
+        function updateTotal() {
+            var checkboxes = document.querySelectorAll('tbody input[type="checkbox"]:checked');
+            var total = 0; // 초기화된 값
+            checkboxes.forEach(function (checkbox) {
+                total += parseInt(checkbox.value);
+            });
+            // 선택된 상품의 가격을 총 상품 금액에 더하고 배송비를 추가하여 출력
+            document.getElementById("sum").value = total + deliveryFee + "원";
+
+            // 선택된 상품의 가격을 총 상품 금액에만 업데이트
+            document.getElementById("product_total").textContent = total + "원";
+        }
+
+        function nightlight(checkbox) {
+            updateTotal();
+            checkAllSelected();
+        }
+
+        function checkAllSelected() {
+            var allCheckboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+            var allChecked = true;
+            allCheckboxes.forEach(function (checkbox) {
+                if (!checkbox.checked) {
+                    allChecked = false;
+                }
+            });
+
+            function updateTotal() {
+                var checkboxes = document.querySelectorAll('tbody input[type="checkbox"]:checked');
+                checkboxes.forEach(function (checkbox) {
+                    var row = checkbox.parentNode.parentNode;
+                    var price = parseInt(checkbox.value);
+                    var deliveryFee = 0; // 배송비 고정값
+                    var total = price + deliveryFee;
+                    var totalCell = row.nextElementSibling.querySelector('.plus span span');
+                    totalCell.textContent = total + "원";
+                });
+            }
+
+            document.getElementById("check_all").checked = allChecked;
+        }
+
+        window.onload = function () {
+            // 페이지 로드 시 모든 상품을 선택하고 총 금액을 업데이트
+            var allCheckboxes = document.querySelectorAll('tbody input[type="checkbox"]');
+            allCheckboxes.forEach(function (checkbox) {
+                checkbox.checked = true;
+            });
+            document.getElementById("check_all").checked = true;
+            updateTotal();
+        }
+
+    </script>
+    <link href="/project/css/merlebleu_payment.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="wrap">
+    <div class="head">
+        <header>
+            <h2></h2>
+        </header>
+    </div>
+    <div id="gotop" class="money_top">
+        <div class="money_title">주문확인</div>
+        <div class="money_detail">
+            <div>
+                <div style="margin-left: 50px;">
+                    <ul style="list-style: none; line-height: 30px;">
+                        <li style="font-size: 15px;">총 상품 금액 <span id="product_total"
+                                                                   style="color: rgb(44, 107, 255); font-weight: bold;">0원</span></li>
+                        <li style="font-size: 15px;">배송비 <span id="product_total"
+                                                               style="color: rgb(44, 107, 255); font-weight: bold;">3000원</span></li>
+                        <li style="font-size: 15px;">도서산간료 <span id="product_total"
+                                                                 style="color: rgb(44, 107, 255); font-weight: bold;">0원</span></li>
+                        <li style="font-size: 15px;">적립금 사용 <span id="product_total"
+                                                                  style="color: rgb(44, 107, 255); font-weight: bold;">0원</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="money_result" style="padding-left: 50px;">
+            <br>
+            <label style="float: inline-start;" for="total" style="font-size: 17px;">총 결제금액</label>
+            <label for="text"
+                   style="border: none; background: none; font-size: 18px; font-weight: bold; color: rgb(44, 107, 255); "><input
+                    style="border: none; width: 150px; background: none; font-size: 18px; font-weight: bold; color: rgb(44, 107, 255); "
+                    type="text" id="sum" size="5" value="3000"></span></label>
+        </div>
+        <button type="submit" class="btn_regst" value="regstri" style="cursor: pointer;">
+            <span class="btn_txt">결제</span>
+        </button>
+    </div>
+    <div class="container" style="border-bottom:  1px solid #999;">
+        <div class="basket_title">
+            <ul>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"
+                         style="vertical-align: middle; ">
+                        <g fill="none" fill-rule="evenodd">
+                            <circle cx="24" cy="24" r="24" fill="#BDBDBD" />
+                            <path d="M12 12h24v24H12z" />
+                            <path fill="#FFF"
+                                  d="M31 18h-2c0-2.76-2.24-5-5-5s-5 2.24-5 5h-2c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V20c0-1.1-.9-2-2-2zm-7-3c1.66 0 3 1.34 3 3h-6c0-1.66 1.34-3 3-3zm7 17H17V20h14v12zm-7-8c-1.66 0-3-1.34-3-3h-2c0 2.76 2.24 5 5 5s5-2.24 5-5h-2c0 1.66-1.34 3-3 3z" />
+                        </g>
+                    </svg>
+                    <span>장바구니</span>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"
+                         style="vertical-align: middle; ">
+                        <g fill="none" fill-rule="evenodd">
+                            <circle cx="24" cy="24" r="24" fill="#237AF6" />
+                            <path d="M12 12h24v24H12z" />
+                            <path fill="#FFF"
+                                  d="M31.5 15.5L30 14l-1.5 1.5L27 14l-1.5 1.5L24 14l-1.5 1.5L21 14l-1.5 1.5L18 14l-1.5 1.5L15 14v20l1.5-1.5L18 34l1.5-1.5L21 34l1.5-1.5L24 34l1.5-1.5L27 34l1.5-1.5L30 34l1.5-1.5L33 34V14l-1.5 1.5zM31 31.09H17V16.91h14v14.18zM18 27h12v2H18v-2zm0-4h12v2H18v-2zm0-4h12v2H18v-2z" />
+                        </g>
+                    </svg>
+                    <span>주문서 작성/ 결제</span>
+                </li>
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"
+                         style="vertical-align: middle; ">
+                        <g fill="none" fill-rule="evenodd">
+                            <circle cx="24" cy="24" r="24" fill="#BDBDBD" />
+                            <path d="M12 12h24v24H12z" />
+                            <path fill="#FFF" d="M21 28.17L16.83 24l-1.42 1.41L21 31l12-12-1.41-1.41z" />
+                        </g>
+                    </svg>
+                    <span>주문완료</span>
+                </li>
+            </ul>
+        </div>
+        <div class="content">
+            <table>
+                <thead>
+                <button type="checkbox" onclick="deleteSelectedRows()"
+                        style="border-radius: 5px; border: none; color: #fff; background: rgb(255, 128, 128); height: 30px; margin-top: 12px; margin-bottom: 5px; cursor: pointer; font-weight: bold; letter-spacing: 1px;">선택삭제</button>
+                <tr style="border-bottom: 1px solid black;">
+                    <th style="padding-left:12px;">
+                        <input type="checkbox" id="check_all" onclick="toggleAll(this)">
+                        <label for="check_all">전체</label>
+                    </th>
+                    <th>상품정보</th>
+                    <th>컬러</th>
+                    <th>사이즈</th>
+                    <th>수량</th>
+                    <th>가격</th>
+                    <th>적립금</th>
+                </tr>
+                </thead>
+                <tbody style="border-bottom: 1px solid black;">
+                <tr>
+                    <td>
+                        <input type="checkbox" id="ck1" onclick="nightlight(this)" value="12000">
+                    </td>
+                    <td>
+                        <div class="detail_title">
+                            <img src="../img/sleeveless/4.jpg" alt="" style="width: 120px;">
+                            <a href="#"><span>부드러운 실크 블라우스</span></a> <!--상품 주소-->
+                        </div>
+                    </td>
+                    <td>BLUE</td>
+                    <td>xs</td>
+                    <td>1</td>
+                    <td>21000원</td>
+                    <td>1000P</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="information">
+        <ul class="if_top" style="border-bottom: 1px solid #ccc;">
+            <li>
+                <div style="margin-left: -100px;">
+                    <h3>주문자 정보</h3>
+                </div>
+                <div class="clear-both"></div>
+                <div class="if_m" style="padding-left: -200px;">
+                    <label for="name">주문자 이름</label>
+                    <input type="text" style="width: 400px;" id="name">
+                </div>
+                <div class="if_b" style="padding-left: -200px;">
+                    <label for="phoneInput">연락처</label>
+                    <input type="text" style="width: 400px;" id="phoneInput" name="phoneInput" maxlength="13"
+                           oninput="formatPhoneNumber(event)" placeholder="010-0000-0000">
+                </div>
+                <div class="if_m" style="padding-left: -200px; margin-top: 15px;">
+                    <label for="email">이메일</label>
+                    <input type="email" style="width: 400px;
+                        font-size: 17px;
+                        height: 40px;
+                        border: 1px solid #ddd;
+                        border-radius: 4px;" id="email">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="information2">
+        <ul class="if_top">
+            <li>
+                <div class="speed" style="margin-left: -100px;">
+                    <h3>배송지 정보</h3>
+                </div>
+                <div class="clear-both"></div>
+                <div class="if_m" style="margin-left: 310px;">
+                    <label for="name"></label>
+                    <div role="group"
+                         class="mat-button-toggle-group two-tab-group mat-button-toggle-group-appearance-standard"
+                         aria-disabled="false">
+                        <div role="presentation"
+                             class="mat-button-toggle mat-button-toggle-appearance-standard mat-button-toggle-checked"
+                             id="mat-button-toggle-1">
+                            <button type="button" class="mat-button-toggle-button mat-focus-indicator"
+                                    id="defaultAddressButton" tabindex="0" aria-pressed="true"
+                                    name="mat-button-toggle-group-0">
+                                <span class="mat-button-toggle-label-content">기본주소</span>
+                            </button>
+                            <span class="mat-button-toggle-focus-overlay"></span>
+                            <span matripple="" class="mat-ripple mat-button-toggle-ripple"></span>
+                        </div>
+                        <div role="presentation" class="mat-button-toggle mat-button-toggle-appearance-standard"
+                             id="mat-button-toggle-2">
+                            <button type="button" class="mat-button-toggle-button mat-focus-indicator"
+                                    id="newAddressButton" tabindex="0" aria-pressed="false"
+                                    name="mat-button-toggle-group-0">
+                                <span class="mat-button-toggle-label-content">새로운주소</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="if_b" style="padding-left: 0px;">
+                    <label for="sample4_name">받으시는 분</label>
+                    <input type="text" style="width: 400px;" id="sample4_name">
+                </div>
+                <div class="if_b" style="padding-left: 0px;">
+                    <label for="sample4_phone">연락처</label>
+                    <input id="sample4_phone" style="width: 400px;" type="text" name="phoneInput" maxlength="13"
+                           oninput="formatPhoneNumber(event)" placeholder="010-0000-0000">
+                </div>
+                <div class="if_b" style="padding-left: 0px;">
+                    <label for="address">주소</label>
+                    <input type="text" id="sample4_postcode" placeholder="우편번호" style="width: 250px;" disabled>
+                    <button class="bb" type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">우편번호
+                        검색</button>
+                </div>
+                <div class="if_b" style="padding-left: 0px;">
+                    <label for="address"></label>
+                    <input type="text" style="width: 400px;" id="sample4_roadAddress" placeholder="도로명주소" disabled>
+                </div>
+                <div class="if_b" style="padding-left: 0px; display: none;">
+                    <label for="address"></label>
+                    <input type="text" style="width: 400px;" id="sample4_jibunAddress" placeholder="지번주소">
+                    <span id="guide" style="color:#999;display:none"></span>
+                </div>
+                <div class="if_b" style="padding-left: 0px;">
+                    <label for="address"></label>
+                    <input type="text" style="width: 400px;" id="sample4_detailAddress" placeholder="상세주소">
+                </div>
+                <div class="if_b" style="padding-left: 0px;">
+                    <label for="message">참고항목</label>
+                    <input type="text" style="width: 400px;" id="sample4_extraAddress" placeholder="참고항목" disabled>
+                </div>
+                <div class="if_b" style="padding-left: 0px;">
+                    <label for="message">배송메세지</label>
+                    <input type="text" style="width: 400px;" id="message" placeholder="베송메세지">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="information3">
+        <ul class="if_top2">
+            <li>
+                <div style="margin-left: -100px;">
+                    <h3>결제정보</h3>
+                </div>
+                <div class="clear-both"></div>
+                <div class="if_m" style="padding-left: 0px;">
+                    <label for="numberInput" style="width: 196px;">적립금 사용</label>
+                    <input input type="text" id="numberInput" name="numberInput" style="width: 200px;">
+                    <span class="e-p" style="width: 250px; margin-left: 10px; color: #999; font-size: 13px;">보유
+                            적립금<span class="e-point"></span>0원</span>
+                </div>
+                <button class="e-b" s style="display: inline-block;">전액사용</button>
+                <span class="u" style="display: inline-block;">결제금액의 최대 10% 까지 사용가능합니다.</span>
+            </li>
+        </ul>
+    </div>
+    <div class="information4">
+        <ul class="if_top3">
+            <li class="bank" style="margin-left: -470px;">
+                <button type="button" id="depositButton">무통장 입금</button>
+                <button type="button" id="creditButton">신용카드</button>
+                <button type="button" id="creditButton">네이버페이</button>
+                <div class="if_b if_c hidden" id="bankOptions">
+                    <label for="receiverName">받으시는 분</label>
+                    <input type="text" id="receiverName" style="width: 188px; margin-left: 0px;">
+                    <select style="border-radius: 5px; border: none;" class="form-button">
+                        <option disabled selected style="background: #ddd;">은행선택</option>
+                        <option value="kb">국민은행</option>
+                        <option value="bnk">부산은행</option>
+                        <option value="shinhan">신한은행</option>
+                        <option value="woori">우리은행</option>
+                    </select>
+                    <div class=""
+                         style="text-align: left; margin-top: 15px; margin-left: 700px; line-height: 25px;">
+                        <p style="font-size: 13px; color: #999;">'무통장입금'를 선택하셨습니다.</p>
+                        <p style="font-size: 10px; color: #999;">무통장입금 Merle Bleu 지정된 계좌로 직접 입금하는 방식입니다. (인터넷뱅킹,
+                            텔레뱅킹, ATM, 은행방문)</p>
+                        <p style="font-size: 10px; color: #999;">실시간계좌이체 은행을 거치지않고 회원님 계좌에서 바로 이체되는 편리한 서비스입니다.
+                            (이체수수료무료 / 공인인증서필수)</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const depositButton = document.getElementById('depositButton');
+        const creditButton = document.getElementById('creditButton');
+        const bankOptions = document.getElementById('bankOptions');
+
+        depositButton.addEventListener('click', function () {
+            bankOptions.classList.remove('hidden');
+        });
+
+        creditButton.addEventListener('click', function () {
+            bankOptions.classList.add('hidden');
+        });
+
+        // 페이지 로드 시 무통장 입금 옵션들을 보이도록 설정
+        bankOptions.classList.remove('hidden');
+        creditButton.classList.remove('hidden');
+    });
+
+
+    document.getElementById('newAddressButton').addEventListener('click', function () {
+        document.getElementById('sample4_name').value = '';
+        document.getElementById('sample4_phone').value = '';
+        document.getElementById('sample4_postcode').value = '';
+        document.getElementById('sample4_roadAddress').value = '';
+        document.getElementById('sample4_jibunAddress').value = '';
+        document.getElementById('sample4_detailAddress').value = '';
+        document.getElementById('sample4_extraAddress').value = '';
+        document.getElementById('message').value = '';
+    });
+
+    function validateNumberInput(event) {
+        const input = event.target;
+        const value = input.value;
+        const regex = /^[0-9]*$/; // 숫자만 허용하는 정규 표현식
+
+        if (!regex.test(value)) {
+            input.value = value.replace(/[^0-9]/g, ''); // 숫자가 아닌 문자는 제거
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const numberInput = document.getElementById('numberInput');
+        numberInput.addEventListener('input', validateNumberInput);
+    });
+
+    function formatPhoneNumber(event) {
+        const input = event.target;
+        let value = input.value.replace(/[^0-9]/g, ''); // 숫자 이외의 문자 제거
+
+        if (value.length > 3 && value.length <= 7) {
+            value = value.slice(0, 3) + '-' + value.slice(3);
+        } else if (value.length > 7) {
+            value = value.slice(0, 3) + '-' + value.slice(3, 7) + '-' + value.slice(7, 11);
+        }
+
+        input.value = value;
+    }
+</script>
+</body>
+
+</html>

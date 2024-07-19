@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merle Bleu</title>
+    <link
+            href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
+            rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/css.css}">
+</head>
+
+<body>
+<div class="outer-wrap">
+    <form id="searchForm1" onsubmit="redirectToSearch1(); return false;">
+        <div class="main_wrap">
+            <div class="header_content gna">
+                <div th:replace="~{fragments/header::header}"></div>
+            </div>
+            <div class="mySlides fade">
+            </div>
+        </div>
+        <div style="text-align:center; margin-top: -210px;">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+</div>
+</form>
+
+<form id="searchForm2" onsubmit="handleSearch(); return false;">
+    <div class="cate_box5 cate_box_child10" onmouseover="cateHover('cate_box_child10')" onmouseout="cateOut()">
+        <div class="wrap_nav2">
+            <div class="box_cont_wrap2" style="margin-left: 50%;">
+                <div id="input-form" style="margin: 0 auto;" class="search_input">
+                    <input autocomplete="off" class="search_input_detail" type="text" id="searchKeyword2"
+                           placeholder="검색어를 입력하세요" style="padding: 15px;">
+                    <button class="search_button" type="submit" onclick="handleSearch()">검색</button>
+                    <p style="margin-bottom: -15px;" class="error-message" id="errorMessage2"></p>
+                </div>
+            </div>
+        </div>
+        <div class="kategory2">
+            <ul>
+                <h3>카테고리 검색</h3>
+                <li><a href="./search_outer#">#아우터</a></li>
+                <li><a href="./search_top#">#탑</a></li>
+                <li><a href="./search_skirt#">#스커트</a></li>
+                <li><a href="./search_pants#">#팬츠</a></li>
+                <li><a href="./search_onepiece#">#원피스</a></li>
+                <li><a href="./search_stuff#">#패션잡화</a></li>
+            </ul>
+        </div>
+        <div class="srch_keyword_box">
+            <div class="recent_keyword">
+                <h3>최근 검색어</h3>
+                <a class="delete" onclick="allDeleteCookie()" style="cursor: pointer;">전체삭제</a>
+                <ul id="recentSearchList">
+                </ul>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<!--===========================================================================================================================================-->
+<!--===========================================================================================================================================-->
+<!--===========================================================================================================================================-->
+<!--===========================================================================================================================================-->
+<!--===========================================================================================================================================-->
+<!--===========================================================================================================================================-->
+
+</div>
+<div class="outer-wrap2">
+    <div class="outer-main-wrap">
+        <div class="outer-link-wrap">
+            <div class="outer-link-content">
+                <ul>
+                    <a href="./search_pants#" class="outer-click-total">
+                        <li>전체보기</li>
+                    </a>
+                    <a href="./pants-formal#">
+                        <li>#포멀</li>
+                    </a>
+                    <a href="./pants-casual#">
+                        <li>#캐쥬얼</li>
+                    </a>
+                    <a href="./pants-shorts#">
+                        <li>#쇼츠</li>
+                    </a>
+                    <a href="./pants-denim#">
+                        <li>#데님</li>
+                    </a>
+                </ul>
+                <h3 style="font-size: 20px;">팬츠#캐쥬얼</h3>
+            </div>
+        </div>
+        <div class="outer-select-wrap">
+            <div class="outer-select">
+                <div class="outer-all">
+                    <a href="#">전체(<span id="totalCount">0</span>)</a>
+                    <select id="sortOptions">
+                        <option value="recommended">추천수</option>
+                        <option value="newest">신상품순</option>
+                        <option value="price-low">낮은가격순</option>
+                        <option value="price-high">높은가격순</option>
+                        <option value="name">상품명순</option>
+                    </select>
+                </div>
+            </div>
+            <table id="pants-results">
+                <tbody>
+                <th:block th:if="${items != null}">
+                    <th:block th:each="item, itemStat : ${items.content}">
+                        <tr th:class="${itemStat.index >= 12} ? 'hidden' : ''">
+                            <td>
+                                <div class="container-outer">
+                                    <a th:href="'/item/'+${item.id}">
+                                        <img th:src="${item.imgUrl}" id="project-img" width="345" height="345"
+                                             onmouseover="this.th:src='../img/special/bra2.jpg';"
+                                             onmouseout="this.th:src='../img/special/bra.jpg';">
+                                        <div class="overlay">
+                                            <p class="overlay-text" style="left: 50%; top: 20%;">Merle Bleu</p>
+                                            <p class="outer text-outer">
+                                                <a th:href="'/item/'+${item.id}">[[${item.itemNm}]]</a>
+                                            </p>
+                                            <p class="line-through" style="text-decoration: line-through; color: #ccc; left: 10%;">
+                                                [[${item.listprice}]]원
+                                            </p>
+                                            <p class="price" style="left: 40%;">[[${item.sellprice}]]원</p>
+                                            <p class="discount" style="color: red; left: 70%;">[[${item.discount}]]%</p>
+                                            <div class="overlay2">
+                                                <a th:href="'/item/'+${item.id}">
+                                                    <p class="color-box"></p>
+                                                </a>
+                                                <a th:href="'/item/'+${item.id}">
+                                                    <p class="color-box2"></p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    </th:block>
+                </th:block>
+                </tbody>
+            </table>
+        </div>
+        <div class="my-btn" style="margin-top: -50px;">
+            <p id="error2" class="error">마지막 페이지 입니다.</p>
+            <button onclick="myFunction()" id="myBtn2">MORE</button>
+        </div>
+    </div>
+</div>
+<div th:replace="~{fragments/footer::footer}"></div>
+
+
+<script src="/js/pants.js" type="text/javascript"></script>
+<script src="/js/js.js" type="text/javascript"></script>
+</body>
+
+</html>

@@ -1,0 +1,360 @@
+#skirt-results {
+    height: auto;
+width: 100%;
+margin: 70px auto;
+padding-left: 170px;
+}
+
+#skirt-results tbody {
+    height: 100%;
+    float: left;
+    display: block;
+    margin-left: 10px;
+}
+
+#skirt-results .hidden {
+    display: none;
+}
+
+#skirt-results tbody tr {
+    display: inline-block;
+}
+
+@media (max-width: 999px) {
+
+/* 모바일 */
+#skirt-results tbody tr img {
+width: 150px;
+height: 150px;
+margin-bottom: 20px;
+}
+
+.overlay {
+position: absolute;
+bottom: 26px;
+left: 0;
+right: 0;
+background-color: #00000077;
+overflow: hidden;
+width: 150px;
+height: 40%;
+transition: .5s ease;
+opacity: 0;
+color: #fff;
+text-align: center;
+display: inline-block
+}
+
+.overlay-text {
+left: 50%;
+top: 30%;
+}
+
+.text-outer {
+color: white;
+font-size: 20px;
+position: absolute;
+top: 50%;
+left: 50%;
+-webkit-transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+text-align: center;
+letter-spacing: -1px;
+margin-top: -7px;
+width: 100%;
+}
+
+.text-outer a {
+text-decoration: none;
+color: inherit;
+font-size: 10px;
+
+
+}
+
+.overlay p {
+font-size: 8px;
+}
+
+.overlay2 .color-box {
+width: 12px;
+height: 12px;
+display: inline-block;
+border: 1px solid #ccc;
+background: #c11515;
+top: 65px;
+left: 50px;
+}
+
+.overlay2 .color-box2 {
+display: inline-block;
+width: 12px;
+height: 12px;
+border: 1px solid #ccc;
+background: #fff;
+top: 65px;
+}
+
+
+.outer-link-wrap .outer-link-content h3 {
+font-size: 15px;
+margin: 0 45%;
+width: 300px;
+padding-top: 50px;
+}
+
+.outer-link-wrap .outer-link-content ul li {
+display: inline-block;
+margin-left: 0px;
+width: 80px;
+background: #cccccc00;
+padding: 10px;
+border-radius: 20px;
+box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+transition: all 0.2s ease;
+text-align: center;
+}
+
+.outer-link-wrap .outer-link-content ul a {
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-size: 9px;
+/* 링크를 블록 요소로 변경하여 전체 영역을 클릭 가능하게 함 */
+}
+
+#sortOptions {
+
+margin-left: 450px;
+
+}
+}
+
+
+
+
+
+@media (min-width:1000px) and (max-width: 1599px) {
+
+/* 태블릿 가로 */
+#skirt-results tbody tr img {
+width: 200px;
+height: 200px;
+margin-bottom: 20px;
+}
+
+.overlay {
+position: absolute;
+bottom: 26px;
+left: 0;
+right: 0;
+background-color: #00000077;
+overflow: hidden;
+width: 200px;
+height: 40%;
+transition: .5s ease;
+opacity: 0;
+color: #fff;
+text-align: center;
+display: inline-block
+}
+
+.overlay p {
+font-size: 12px;
+}
+
+.overlay-text {
+left: 50%;
+margin-top: -10px;
+}
+
+.text-outer {
+color: white;
+font-size: 10px;
+position: absolute;
+top: 45%;
+left: 50%;
+-webkit-transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+text-align: center;
+letter-spacing: -1px;
+margin-top: -15px;
+width: 100%;
+}
+
+.text-outer a {
+text-decoration: none;
+color: inherit;
+font-size: 12px;
+
+
+
+}
+
+.overlay2 .color-box {
+width: 12px;
+height: 12px;
+display: inline-block;
+border: 1px solid #ccc;
+background: #c11515;
+top: 85px;
+left: 80px;
+}
+
+.overlay2 .color-box2 {
+display: inline-block;
+width: 12px;
+height: 12px;
+border: 1px solid #ccc;
+background: #fff;
+top: 85px;
+}
+
+.outer-link-wrap .outer-link-content h3 {
+font-size: 20px;
+margin: 0 45%;
+width: 300px;
+padding-top: 50px;
+}
+
+
+.outer-link-wrap .outer-link-content ul li {
+display: inline-block;
+margin-left: 20px;
+width: 90px;
+background: #cccccc00;
+padding: 10px;
+border-radius: 20px;
+box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+transition: all 0.2s ease;
+text-align: center;
+}
+
+.outer-link-wrap .outer-link-content ul a {
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-size: 10px;
+/* 링크를 블록 요소로 변경하여 전체 영역을 클릭 가능하게 함 */
+}
+
+#sortOptions {
+
+margin-left: 850px;
+
+}
+}
+
+@media (min-width: 1600px) {
+/* 데스크탑 일반 */
+
+#skirt-results tbody tr img {
+width: 300px;
+height: 300px;
+margin-bottom: 20px;
+}
+
+.overlay {
+position: absolute;
+bottom: 26px;
+left: 0;
+right: 0;
+background-color: #00000077;
+overflow: hidden;
+width: 300px;
+height: 40%;
+transition: .5s ease;
+opacity: 0;
+color: #fff;
+text-align: center;
+display: inline-block
+}
+
+.overlay p {
+font-size: 15px;
+}
+
+.overlay-text {
+left: 50%;
+margin-top: -10px;
+}
+
+.text-outer {
+color: white;
+font-size: 20px;
+position: absolute;
+top: 50%;
+left: 50%;
+-webkit-transform: translate(-50%, -50%);
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+text-align: center;
+letter-spacing: -1px;
+text-decoration: none;
+color: inherit;
+font-size: 15px;
+width: 100%;
+margin-top: -15px;
+}
+
+.text-outer a {
+text-decoration: none;
+color: inherit;
+font-size: 15px;
+
+
+}
+
+.overlay2 .color-box {
+width: 12px;
+height: 12px;
+display: inline-block;
+border: 1px solid #ccc;
+background: #c11515;
+top: 120px;
+left: 130px;
+}
+
+.overlay2 .color-box2 {
+display: inline-block;
+width: 12px;
+height: 12px;
+border: 1px solid #ccc;
+background: #fff;
+top: 120px;
+}
+
+.outer-link-wrap .outer-link-content h3 {
+font-size: 30px;
+margin: 0 45%;
+width: 250px;
+padding-top: 50px;
+
+}
+
+.outer-link-wrap .outer-link-content ul li {
+display: inline-block;
+margin-left: 30px;
+width: 120px;
+background: #cccccc00;
+padding: 10px;
+border-radius: 20px;
+box-shadow: 0px 3px 3px rgba(0, 0, 0, 0.3);
+transition: all 0.2s ease;
+text-align: center;
+}
+
+.outer-link-wrap .outer-link-content ul a {
+text-decoration: none;
+color: rgb(0, 0, 0);
+font-size: 13px;
+/* 링크를 블록 요소로 변경하여 전체 영역을 클릭 가능하게 함 */
+}
+
+#sortOptions {
+
+margin-left: 1350px;
+}
+
+
+}

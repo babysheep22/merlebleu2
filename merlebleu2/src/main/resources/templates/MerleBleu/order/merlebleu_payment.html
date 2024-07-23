@@ -118,10 +118,14 @@
             });
             // 선택된 상품의 가격을 총 상품 금액에 더하고 배송비를 추가하여 출력
             document.getElementById("sum").value = total + deliveryFee + "원";
-
             // 선택된 상품의 가격을 총 상품 금액에만 업데이트
             document.getElementById("product_total").textContent = total + "원";
+
+            //선택된 상품의 수량을 금액에 반영
         }
+
+
+
 
         function nightlight(checkbox) {
             updateTotal();
@@ -304,7 +308,7 @@
                     <tbody style="border-bottom: 1px solid black;">
                         <tr>
                             <td>
-                                <input type="checkbox" id="ck1" onclick="nightlight(this)" th:value="${item.sellprice}">
+                                <input type="checkbox" id="ck1" onclick="nightlight(this)" th:value="${item.sellprice}*${order.count}">
                             </td>
                             <td>
                                 <div class="detail_title">
@@ -314,7 +318,7 @@
                             </td>
                             <td>BLUE</td>
                             <td>xs</td>
-                            <td><span th:text="${order.count}"></span></td>
+                            <td><span id="itemcount" th:text="${order.count}"></span></td>
                             <td><span th:text="${item.sellprice}"></span></td>
                             <input type="hidden" id="itemId" th:value="${order.itemId}">
                             <input type="hidden" id="count" th:value="${order.count}">
@@ -395,7 +399,7 @@
                     </div>
                     <div class="if_b" style="padding-left: 0px;">
                         <label for="address">주소</label>
-                        <input type="text" id="sample4_postcode" placeholder="'우편번호 ' + ${member.postcode}" style="width: 250px;" disabled>
+                        <input type="text" id="sample4_postcode" placeholder="'우편번호 ' + '${member.postcode}'" style="width: 250px;" disabled>
                         <button class="bb" type="button" onclick="sample4_execDaumPostcode()" value="우편번호 찾기">우편번호
                             검색</button>
                     </div>

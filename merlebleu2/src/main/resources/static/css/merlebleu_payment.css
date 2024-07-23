@@ -232,13 +232,13 @@ body {
     background: none;
     width: 290px;
     height: 380px;
+    border: 1px solid #ddd;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     margin-right: 20px;
-    background-image: url();
     background-size: 330px;
+    background-color: #f0f0f0;
     background-position: 0px -20px;
-    background-repeat: no-repeat;
     left: 1200px;
 }
 

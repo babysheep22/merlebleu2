@@ -334,8 +334,8 @@
                     </td>
                     <td>BLUE</td>
                     <td>xs</td>
-                    <td><span th:text="${order.count}"></span></td>
-                    <td><span th:text="${order.sellprice}"></span></td>
+                    <td><span th:id="'count_' + ${order.cartItemId}" th:text="${order.count}"></span></td>
+                    <td><span th:id="'price_' + ${order.cartItemId}" th:text="${order.sellprice}"></span></td>
                     <input type="hidden" id="cartItemId" th:value="${order.getCartItemId}">
                     <input type="hidden" id="count" th:value="${order.count}">
                     <td>0p</td>
